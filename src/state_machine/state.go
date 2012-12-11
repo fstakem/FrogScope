@@ -7,6 +7,7 @@ import (
 
 type State struct {
 	Name string
+	Id int
 	Timestamps []Timestamp
 	Transitions []StateTransistion
 }
