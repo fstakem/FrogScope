@@ -14,10 +14,10 @@ import (
 func init() {
 	fmt.Println("Entering init function")
 	
-	var sm state_machine.Timestamp 
-	sm.EnterTime = time.Now()
-	time.Sleep(5)
-	sm.ExitTime = time.Now()
+	//var fred Time.
+	//sm.EnterTime = time.Now()
+	//time.Sleep(5)
+	//sm.ExitTime = time.Now()
 	
 	fmt.Println("Exiting init function")
 }

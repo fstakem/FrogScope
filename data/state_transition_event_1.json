@@ -1,0 +1,16 @@
+{
+    "msg_ver": 1,
+    "scope": "test",
+    "timestamp": 123456789,
+    "type": "state_transition",
+    "data": {
+        "id": 24,
+        "state_machine_id": 1,
+        "from_state_id": 4,
+        "to_state_id": 5,
+        "timestamp": 123456789,
+        "cause": {
+            "a": 10
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "msg_ver": 1,
+    "scope": "test",
+    "timestamp": 123456789,
+    "type": "state_machine",
+    "data": {
+        "name": "machina",
+        "id": 24,
+        "states": [
+            {
+                "name": "init",
+                "id": 1
+            },
+            {
+                "name": "second",
+                "id": 2
+            }
+        ],
+        "transitions": [
+            {
+                "name": "x",
+                "id": 1,
+                "from_id": 1,
+                "to_id": 2,
+                "cause": 1
+            },
+            {
+                "name": "y",
+                "id": 2,
+                "from_id": 2,
+                "to_id": 1,
+                "cause": 1
+            }
+        ]
+    }
+}

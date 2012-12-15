@@ -8,9 +8,8 @@ import (
 type State struct {
 	Name string
 	Id int
-	EnterTimestamp int64
-	ExitTimestamp int64
-	Transitions []StateTransistion
+	EnterTimestamp []int64
+	ExitTimestamp []int64
 }
 
 func(state State) Test() string {
