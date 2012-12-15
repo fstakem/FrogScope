@@ -8,7 +8,8 @@ import (
 type State struct {
 	Name string
 	Id int
-	Timestamps []Timestamp
+	EnterTimestamp int64
+	ExitTimestamp int64
 	Transitions []StateTransistion
 }
 
