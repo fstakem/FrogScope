@@ -3,7 +3,6 @@ package main
 // Libraries
 import (
 	"fmt"
-	"time"
 	"./state_machine"
 )
 

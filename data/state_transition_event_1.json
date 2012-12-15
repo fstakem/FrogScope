@@ -1,5 +1,6 @@
 {
     "msg_ver": 1,
+    "seq_num": 1,
     "scope": "test",
     "timestamp": 123456789,
     "type": "state_transition",

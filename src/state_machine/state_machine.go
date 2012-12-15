@@ -8,7 +8,7 @@ type StateMachine struct {
 	Name string
 	Id int
 	States []State
-	Transitions []StateTransistion
+	Transitions []StateTransition
 }
 
 func(this *StateMachine) AnalyzeLog(log string) {

@@ -4,7 +4,7 @@ import (
 
 )
 
-type StateTransistion struct {
+type StateTransition struct {
 	Name string
 	Id int
 	timestamp int64
