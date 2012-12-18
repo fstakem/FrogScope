@@ -6,8 +6,7 @@ import (
 )
 
 func readFile(filename string) (data string, err error) {
-	var raw_data []byte
-	raw_data, err = ioutil.ReadFile(filename)
+	raw_data, err := ioutil.ReadFile(filename)
     if err != nil { return "", err }
     
     return string(raw_data), nil
@@ -23,7 +22,6 @@ func TestNewLogMsg(t *testing.T) {
 	test_log_msg.Timestamp = 123456789
 	test_log_msg.Transmitter = "main"
 	test_log_msg.Type = "state_transition"
-	test_log_msg.Data = make(map[string]string)
 	
 	// Import file
 	filename := "../../data/state_transition_event_1.json"
@@ -38,9 +36,15 @@ func TestNewLogMsg(t *testing.T) {
 	t.Log(raw_data)
 	log_msg := NewLogMsg(raw_data)
 	
+	// Make sure an object was returned
+	if log_msg == nil {
+		t.Log("Unable to parse JSON data.")
+		t.Fail()
+	}
+	
 	// Test to make sure objects are the same
 	if !log_msg.Cmp(&test_log_msg) {
-		t.Log("The JSON data was not interpretted correctly.")
+		t.Log("The JSON data was not interpreted correctly.")
 		t.Fail()
 	}
 }

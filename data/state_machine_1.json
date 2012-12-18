@@ -1,5 +1,5 @@
 {
-    "Protocol": "frogscope"
+    "Protocol": "frogscope",
     "Version": 1,
     "SeqNum": 1,
     "Scope": "test",
