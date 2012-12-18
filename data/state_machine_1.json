@@ -1,10 +1,12 @@
 {
-    "msg_ver": 1,
-    "seq_num": 1,
-    "scope": "test",
-    "timestamp": 123456789,
-    "type": "state_machine",
-    "data": {
+    "Protocol": "frogscope"
+    "Version": 1,
+    "SeqNum": 1,
+    "Scope": "test",
+    "Timestamp": 123456789,
+    "Transmitter": "main",
+    "Type": "state_machine",
+    "Data": {
         "name": "machina",
         "id": 24,
         "states": [
