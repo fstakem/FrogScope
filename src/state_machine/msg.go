@@ -16,14 +16,14 @@ const (
 )
 
 type LogMsg struct {
-	Protocol string
-	Version int
-	SeqNum int
-	Scope string
-	Timestamp int64
-	Transmitter string
-	Type string
-	Data map[string]string
+	Protocol 	string 				"Protocol"
+	Version 		int					"Version"
+	SeqNum 		int					"SeqNum"
+	Scope 		string				"Scope"
+	Timestamp 	int64				"Timestamp"
+	Transmitter string				"Transmitter"
+	Type 		string				"Type"
+	Data 		map[string]string	"Data"
 }
 
 func NewLogMsg(msg string) *LogMsg {
@@ -31,11 +31,37 @@ func NewLogMsg(msg string) *LogMsg {
 		return nil
 	}
 	
-	var log_msg LogMsg
-	err := json.Unmarshal([]byte(msg), &log_msg)
+	//var log_msg LogMsg
+	//err := json.Unmarshal([]byte(msg), &log_msg)
+	
+	var raw_log_msg interface{}
+    err := json.Unmarshal([]byte(msg), &raw_log_msg)
 	
 	if err == nil {
 		return nil
+	}
+	
+	var log_msg LogMsg
+	
+	log_msg_map := raw_log_msg.(map[string]interface{})
+	for key, value := range log_msg_map {
+		if key == "Protocol" {
+			log_msg.Protocol = string(value)
+		} else if key == "Version" {
+		
+		} else if key == "SeqNum" {
+		
+		} else if key == "Scope" {
+		
+		} else if key == "Timestamp" {
+		
+		} else if key == "Transmitter" {
+		
+		} else if key == "Type" {
+		
+		} else if key == "Data" {
+		
+		}
 	}
 	
 	return &log_msg
