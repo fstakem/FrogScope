@@ -1,38 +1,38 @@
 {
     "Protocol": "frogscope",
-    "Version": 1,
-    "SeqNum": 1,
+    "Version": "1",
+    "SeqNum": "1",
     "Scope": "test",
-    "Timestamp": 123456789,
+    "Timestamp": "123456789",
     "Transmitter": "main",
     "Type": "state_machine",
     "Data": {
         "Name": "machina",
-        "Id": 24,
+        "Id": "24",
         "States": [
             {
                 "Name": "init",
-                "Id": 1
+                "Id": "1"
             },
             {
                 "Name": "second",
-                "Id": 2
+                "Id": "2"
             }
         ],
         "Transitions": [
             {
                 "Name": "x",
-                "Id": 1,
-                "FromId": 1,
-                "ToId": 2,
-                "Cause": 1
+                "Id": "1",
+                "FromId": "1",
+                "ToId": "2",
+                "Cause": "1"
             },
             {
                 "Name": "y",
-                "Id": 2,
-                "FromId": 2,
-                "ToId": 1,
-                "Cause": 1
+                "Id": "2",
+                "FromId": "2",
+                "ToId": "1",
+                "Cause": "1"
             }
         ]
     }

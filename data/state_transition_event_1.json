@@ -1,19 +1,19 @@
 {
     "Protocol": "frogscope",
-    "Version": 1,
-    "SeqNum": 1,
+    "Version": "1",
+    "SeqNum": "1",
     "Scope": "test",
-    "Timestamp": 123456789,
+    "Timestamp": "123456789",
     "Transmitter": "main",
     "Type": "state_transition",
     "Data": {
-        "Id": 24,
-        "StateMachineId": 1,
-        "FromStateId": 4,
-        "ToStateId": 5,
-        "Timestamp": 123456789,
+        "Id": "24",
+        "StateMachineId": "1",
+        "FromStateId": "4",
+        "ToStateId": "5",
+        "Timestamp": "123456789",
         "Cause": {
-            "a": 10
+            "a": "10"
         }
     }
 }

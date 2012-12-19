@@ -3,6 +3,7 @@ package state_machine
 import (
 	"bytes"
 	"strconv"
+	"log"
 )
 
 // Message enum type
@@ -21,7 +22,7 @@ type LogMsg struct {
 	Timestamp 	uint64				
 	Transmitter string				
 	Type 		string				
-	Data 		map[string]interface{}	
+	Data 		*map[string]interface{}	
 }
 
 func NewLogMsg(raw_log_msg *RawLogMsg) *LogMsg {
@@ -30,7 +31,45 @@ func NewLogMsg(raw_log_msg *RawLogMsg) *LogMsg {
 	}
 	
 	var log_msg LogMsg
-	// TODO
+	
+	// Protocol
+	log_msg.Protocol = raw_log_msg.Protocol
+	
+	// Version
+	version, err := strconv.Atoi(raw_log_msg.Version)
+	if err != nil {
+		log.Println("RawLogMsg.Version not properly parsed.")
+		return nil
+	}
+	log_msg.Version = version
+	
+	// SeqNum
+	seqNum, err := strconv.Atoi(raw_log_msg.SeqNum)
+	if err != nil {
+		log.Println("RawLogMsg.SeqNum not properly parsed.")
+		return nil
+	}
+	log_msg.SeqNum = seqNum
+	
+	// Scope
+	log_msg.Scope = raw_log_msg.Scope
+	
+	// Timestamp
+	timestamp, err := strconv.ParseUint(raw_log_msg.Timestamp, 10, 64)
+	if err != nil {
+		log.Println("RawLogMsg.Timestamp not properly parsed.")
+		return nil
+	}
+	log_msg.Timestamp = timestamp
+	
+	// Transmitter
+	log_msg.Transmitter = raw_log_msg.Transmitter
+	
+	// Type
+	log_msg.Type = raw_log_msg.Type
+	
+	// Data
+	log_msg.Data = &raw_log_msg.Data
 	
 	return &log_msg
 }
