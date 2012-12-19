@@ -12,7 +12,15 @@ type State struct {
 	ExitTimestamp []int64
 }
 
-func(state State) Test() string {
-	return ""
+func NewState(data *map[string]interface{}) *State {
+	if len(*data) == 0 {
+		return nil
+	}
+	
+	var state State
+	
+	// Parse and fill in
+	
+	return &state
 }
 

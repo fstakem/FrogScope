@@ -1,7 +1,6 @@
 package state_machine
 
 import (
-	"fmt"
 	"encoding/json"
 	"bytes"
 	"strconv"
@@ -35,7 +34,6 @@ func NewLogMsg(msg string) *LogMsg {
 	err := json.Unmarshal([]byte(msg), &log_msg)
 	
 	if err != nil {
-		fmt.Println(err.Error())
 		return nil
 	}
 	
@@ -44,8 +42,6 @@ func NewLogMsg(msg string) *LogMsg {
 
 func (this *LogMsg) Cmp(other *LogMsg) (equ bool) {
 	if this.Protocol != other.Protocol { 
-		fmt.Println(this.String())
-		fmt.Println(other.String())
 		return false 
 	} else if this.Version != other.Version {
 		return false 
@@ -75,18 +71,37 @@ func (this *LogMsg) String() (output string) {
 	return buffer.String()
 }
  
-func ParseStateMachineMsg(data *map[string]string) *StateMachine {
+func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
+	return nil
+}
 
-	for key, value := range *data {
-		fmt.Println("%s::%s",  key, value)
+func ParseStateTransitionMsg(data *map[string]interface{}) *StateTransition {
+
+
+	/*
+	for key, _ := range *data {
+		if key == "Id" {
+			fmt.Println("++++++++++++++++++", key)
+		} else if key == "StateMachineId" {
+			fmt.Println("++++++++++++++++++", key)
+		} else if key == "FromStateId" {
+			fmt.Println("++++++++++++++++++", key)
+		} else if key == "ToStateId" {
+			fmt.Println("++++++++++++++++++", key)
+		} else if key == "Timestamp" {
+			fmt.Println("++++++++++++++++++", key)
+		} else if key == "Cause" {
+			fmt.Println("++++++++++++++++++", key)
+		}
 	}
+	*/
+	
+	
 	
 	return nil
 }
 
-func ParseStateTransitionMsg(data *map[string]string) *StateTransition {
-	return nil
-}
+
 
 
 

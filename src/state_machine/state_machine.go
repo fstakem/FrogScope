@@ -11,7 +11,17 @@ type StateMachine struct {
 	Transitions []StateTransition
 }
 
-func(this *StateMachine) AnalyzeLog(log string) {
-
+func NewStateMachine(data *map[string]interface{}) *StateMachine {
+	if len(*data) == 0 {
+		return nil
+	}
+	
+	var state_machine StateMachine
+	
+	// Parse and fill in
+	
+	return &state_machine
 }
+
+
 
