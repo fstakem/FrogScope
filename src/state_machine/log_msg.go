@@ -1,7 +1,6 @@
 package state_machine
 
 import (
-	"encoding/json"
 	"bytes"
 	"strconv"
 )
@@ -19,23 +18,19 @@ type LogMsg struct {
 	Version 		int					
 	SeqNum 		int					
 	Scope 		string				
-	Timestamp 	int64				
+	Timestamp 	uint64				
 	Transmitter string				
 	Type 		string				
 	Data 		map[string]interface{}	
 }
 
-func NewLogMsg(msg string) *LogMsg {
-	if len(msg) == 0 {
+func NewLogMsg(raw_log_msg *RawLogMsg) *LogMsg {
+	if raw_log_msg == nil {
 		return nil
 	}
 	
 	var log_msg LogMsg
-	err := json.Unmarshal([]byte(msg), &log_msg)
-	
-	if err != nil {
-		return nil
-	}
+	// TODO
 	
 	return &log_msg
 }
@@ -64,7 +59,7 @@ func (this *LogMsg) String() (output string) {
 	buffer.WriteString("  Version: " + strconv.Itoa(this.Version))
 	buffer.WriteString("  SeqNum: " + strconv.Itoa(this.SeqNum))
 	buffer.WriteString("  Scope: " + this.Scope)
-	buffer.WriteString("  Timestamp: " + strconv.FormatInt(this.Timestamp, 10))
+	buffer.WriteString("  Timestamp: " + strconv.FormatUint(this.Timestamp, 10))
 	buffer.WriteString("  Transmitter: " + this.Transmitter)
 	buffer.WriteString("  Type: " + this.Type)
 	
@@ -76,8 +71,6 @@ func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
 }
 
 func ParseStateTransitionMsg(data *map[string]interface{}) *StateTransition {
-
-
 	/*
 	for key, _ := range *data {
 		if key == "Id" {
@@ -95,12 +88,8 @@ func ParseStateTransitionMsg(data *map[string]interface{}) *StateTransition {
 		}
 	}
 	*/
-	
-	
-	
 	return nil
 }
-
 
 
 
