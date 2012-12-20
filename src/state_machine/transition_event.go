@@ -1,8 +1,6 @@
 package state_machine
 
 import (
-	"fmt"
-	"encoding/json"
 	"bytes"
 	"strconv"
 )
@@ -16,20 +14,31 @@ type TransitionEvent struct {
 	Cause 			map[string]interface{}
 }
 
-func NewTransitionEvent(msg string) *TransitionEvent {
-	if len(msg) == 0 {
+func NewTransitionEvent(raw_transition_event *RawTransitionEvent) *TransitionEvent {
+	if raw_transition_event == nil {
 		return nil
 	}
 
 	var transition_event TransitionEvent
-	err := json.Unmarshal([]byte(msg), &transition_event)
-	
-	if err != nil {
-		fmt.Println(err.Error())
-		return nil
-	}
+	// TODO 
 	
 	return &transition_event
+}
+
+func (this *TransitionEvent) Cmp(other *TransitionEvent) (equ bool) {
+	if this.Id != other.Id { 
+		return false 
+	} else if this.StateMachineId != other.StateMachineId {
+		return false 
+	} else if this.FromStateId != other.FromStateId {
+		return false
+	} else if this.ToStateId != other.ToStateId {
+		return false
+	} else if this.Timestamp != other.Timestamp {
+		return false
+	} 
+	
+	return true
 }
 
 func (this *TransitionEvent) String() (output string) {

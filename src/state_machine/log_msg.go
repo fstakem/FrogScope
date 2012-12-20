@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"strconv"
 	"log"
+	"encoding/json"
 )
 
 // Message enum type
@@ -110,23 +111,23 @@ func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
 }
 
 func ParseStateTransitionMsg(data *map[string]interface{}) *StateTransition {
-	/*
-	for key, _ := range *data {
-		if key == "Id" {
-			fmt.Println("++++++++++++++++++", key)
-		} else if key == "StateMachineId" {
-			fmt.Println("++++++++++++++++++", key)
-		} else if key == "FromStateId" {
-			fmt.Println("++++++++++++++++++", key)
-		} else if key == "ToStateId" {
-			fmt.Println("++++++++++++++++++", key)
-		} else if key == "Timestamp" {
-			fmt.Println("++++++++++++++++++", key)
-		} else if key == "Cause" {
-			fmt.Println("++++++++++++++++++", key)
-		}
+	m_data, err := json.Marshal(data)
+	
+	if err != nil {
+		log.Println("")
+		return nil
 	}
-	*/
+	
+	data_str := string(m_data)
+	raw_transition_event := NewRawTransitionEvent(data_str)
+	
+	// Check for nil
+	
+	NewTransitionEvent()
+	
+	// Check for nil
+	
+	
 	return nil
 }
 

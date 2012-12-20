@@ -33,6 +33,15 @@ func TestParseStateMachineMsg(t *testing.T) {
 }
 
 func TestParseStateTransitionMsg(t *testing.T) {
+	// Test data
+	// TODO
+	
+	// Import file
+	filename := "../../data/state_transition_event_1.json"
+	log_msg := getRawMsg(t, filename)
+	ParseStateTransitionMsg(log_msg.Data)
+	
+	
 	// Parse the state transition specific data
 	//state_transition := ParseStateTransitionMsg(&log_msg.Data)
 	//data, err := json.Marshal(&log_msg.Data)
