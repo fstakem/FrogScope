@@ -110,25 +110,30 @@ func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
 	return nil
 }
 
-func ParseStateTransitionMsg(data *map[string]interface{}) *StateTransition {
-	m_data, err := json.Marshal(data)
+func ParseStateTransitionMsg(data *map[string]interface{}) *TransitionEvent {
+	j_data, err := json.Marshal(data)
 	
 	if err != nil {
 		log.Println("")
 		return nil
 	}
 	
-	data_str := string(m_data)
+	data_str := string(j_data)
 	raw_transition_event := NewRawTransitionEvent(data_str)
 	
-	// Check for nil
+	if raw_transition_event == nil {
+		log.Println("")
+		return nil
+	}
 	
-	NewTransitionEvent()
+	transition_event := NewTransitionEvent(raw_transition_event)
 	
-	// Check for nil
+	if transition_event == nil {
+		log.Println("")
+		return nil
+	}
 	
-	
-	return nil
+	return transition_event
 }
 
 

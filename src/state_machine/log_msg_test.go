@@ -34,21 +34,29 @@ func TestParseStateMachineMsg(t *testing.T) {
 
 func TestParseStateTransitionMsg(t *testing.T) {
 	// Test data
-	// TODO
+	test_transition_event := TransitionEvent{}
+	test_transition_event.Id = 24
+	test_transition_event.StateMachineId = 1
+	test_transition_event.FromStateId = 4
+	test_transition_event.ToStateId = 5
+	test_transition_event.Timestamp = 123456789
+	test_transition_event.Cause = make(map[string]string)
+	test_transition_event.Cause["a"] = "10"
 	
 	// Import file
 	filename := "../../data/state_transition_event_1.json"
 	log_msg := getRawMsg(t, filename)
-	ParseStateTransitionMsg(log_msg.Data)
 	
+	// Create transition event from imported file
+	transition_event := ParseStateTransitionMsg(log_msg.Data)
+	t.Log("Transition event imported from the file:")
+	t.Logf(transition_event.String())
 	
-	// Parse the state transition specific data
-	//state_transition := ParseStateTransitionMsg(&log_msg.Data)
-	//data, err := json.Marshal(&log_msg.Data)
-	//data_str := string(data)
-	//t.Log(data_str)
-	//transition_event := NewTransitionEvent(data_str)
-	//t.Log(transition_event.String())
+	// Test to make sure objects are the same
+	if !transition_event.Cmp(&test_transition_event) {
+		t.Log("The JSON data was not interpreted correctly.")
+		t.Fail()
+	}
 }
 
 func readFile(filename string) (data string, err error) {
@@ -59,31 +67,30 @@ func readFile(filename string) (data string, err error) {
 }
 
 func getRawMsg(t *testing.T, filename string) (log_msg *LogMsg) {
+	// Create msg from imported file
 	raw_data, err := readFile(filename)
 	if err != nil {
 		t.Log("Unable to open file.")
 		t.Fail()
 	}
-	
-	// Create object from imported file
-	t.Log("Data imported from the file:")
+	t.Log("Message imported from the file:")
 	t.Log(raw_data)
-	raw_log_msg := NewRawLogMsg(raw_data)
 	
-	// Make sure an object was returned
+	// Create data structure from data
+	raw_log_msg := NewRawLogMsg(raw_data)
 	if raw_log_msg == nil {
 		t.Log("Unable to parse JSON data.")
 		t.Fail()
 	}
 	
-	// Create internal object from json based object
+	// Transform data structure to new one
 	log_msg = NewLogMsg(raw_log_msg)
-	
-	// Make sure an object was returned
 	if log_msg == nil {
 		t.Log("Unable to parse raw data.")
 		t.Fail()
 	}
+	t.Log("Message created from the data:")
+	t.Log(log_msg.String())
 	
 	return log_msg
 }

@@ -9,6 +9,7 @@ type RawTransitionEvent struct {
 	StateMachineId 	string
 	FromStateId 		string
 	ToStateId 		string
+	Timestamp		string
 	Cause 			map[string]interface{}
 }
 
@@ -36,6 +37,8 @@ func (this *RawTransitionEvent) Cmp(other *RawTransitionEvent) (equ bool) {
 		return false 
 	} else if this.ToStateId != other.ToStateId {
 		return false 
+	} else if this.Timestamp != other.Timestamp {
+		return false
 	}
 	
 	return true
