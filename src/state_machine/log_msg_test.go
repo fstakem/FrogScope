@@ -29,7 +29,15 @@ func TestNewLogMsg(t *testing.T) {
 }
 
 func TestParseStateMachineMsg(t *testing.T) { 
-
+	// Test data
+	
+	// Import file
+	filename := "../../data/state_machine_1.json"
+	log_msg := getRawMsg(t, filename)
+	
+	// Create state machine from imported file
+	
+	// Test to make sure the objects are the same
 }
 
 func TestParseStateTransitionMsg(t *testing.T) {
