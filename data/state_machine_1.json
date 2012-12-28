@@ -25,14 +25,29 @@
                 "Id": "1",
                 "FromId": "1",
                 "ToId": "2",
-                "Cause": "1"
+                "Causes": [
+            		{ 
+               			"Expression": "a = 3"
+            		},
+            		{
+               			"Expression": "b > 4"
+            		}
+        		]
+
             },
             {
                 "Name": "y",
                 "Id": "2",
                 "FromId": "2",
                 "ToId": "1",
-                "Cause": "1"
+                "Causes": [
+            		{ 
+               			"Expression": "a = 5"
+            		},
+            		{
+               			"Expression": "b > 6"
+            		}
+        		]
             }
         ]
     }

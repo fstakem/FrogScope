@@ -10,8 +10,8 @@ import (
 type State struct {
 	Name 			string
 	Id 				int
-	EnterTimestamp 	[]uint64
-	ExitTimestamp 	[]uint64
+	EnterTimestamps 	[]uint64
+	ExitTimestamps 	[]uint64
 }
 
 func NewState(raw_state *RawState) *State {
@@ -42,9 +42,9 @@ func (this *State) Cmp(other *State) (equ bool) {
 		return false
 	}
 	
-	if len(this.EnterTimestamp) == len(other.EnterTimestamp) {
-		for i := range this.EnterTimestamp {
-			if this.EnterTimestamp[i] != other.EnterTimestamp[i] {
+	if len(this.EnterTimestamps) == len(other.EnterTimestamps) {
+		for i := range this.EnterTimestamps {
+			if this.EnterTimestamps[i] != other.EnterTimestamps[i] {
 				return false
 			}
 		}
@@ -52,9 +52,9 @@ func (this *State) Cmp(other *State) (equ bool) {
 		return false
 	}
 	
-	if len(this.ExitTimestamp) == len(other.ExitTimestamp) {
-		for i := range this.ExitTimestamp {
-			if this.ExitTimestamp[i] != other.ExitTimestamp[i] {
+	if len(this.ExitTimestamps) == len(other.ExitTimestamps) {
+		for i := range this.ExitTimestamps {
+			if this.ExitTimestamps[i] != other.ExitTimestamps[i] {
 				return false
 			}
 		}
@@ -71,13 +71,15 @@ func (this *State) String() (output string) {
 	buffer.WriteString(" Id: " + strconv.Itoa(this.Id))
 	
 	buffer.WriteString(" Enter Timestamps: ")
-	for i := range this.EnterTimestamp {
-		buffer.WriteString(strconv.FormatUint(this.EnterTimestamp[i], 10))
+	for i := range this.EnterTimestamps {
+		buffer.WriteString(strconv.FormatUint(this.EnterTimestamps[i], 10))
+		buffer.WriteString(" ")
 	}
 	
 	buffer.WriteString(" Exit Timestamps: ")
-	for i := range this.ExitTimestamp {
-		buffer.WriteString(strconv.FormatUint(this.ExitTimestamp[i], 10))
+	for i := range this.ExitTimestamps {
+		buffer.WriteString(strconv.FormatUint(this.ExitTimestamps[i], 10))
+		buffer.WriteString(" ")
 	}
 	
 	return buffer.String()

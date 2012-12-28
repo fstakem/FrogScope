@@ -10,7 +10,7 @@ type RawStateTransition struct {
 	Id 		string
 	FromId 	string
 	ToId 	string
-	Cause 	string
+	Causes 	map[string]interface{}
 }
 
 func NewRawStateTransition(msg string) *RawStateTransition {
@@ -37,8 +37,6 @@ func (this *RawStateTransition) Cmp(other *RawStateTransition) (equ bool) {
 		return false 
 	} else if this.ToId != other.ToId {
 		return false 
-	} else if this.Cause != other.Cause {
-		return false 
 	} 
 	
 	return true
@@ -50,7 +48,6 @@ func (this *RawStateTransition) String() (output string) {
 	buffer.WriteString("  Id: " + this.Id)
 	buffer.WriteString("  FromId: " + this.FromId)
 	buffer.WriteString("  ToId: " + this.ToId)
-	buffer.WriteString("  Cause: " + this.Cause)
 	
 	return buffer.String()
 }

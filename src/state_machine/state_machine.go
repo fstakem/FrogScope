@@ -19,9 +19,13 @@ func NewStateMachine(raw_state_machine *RawStateMachine) *StateMachine {
 	
 	var state_machine StateMachine
 	
-	// Parse and fill in
-	// TODO
-	//
+	// Name
+	
+	// Id
+	
+	// States
+	
+	// Transitions
 	
 	return &state_machine
 }
