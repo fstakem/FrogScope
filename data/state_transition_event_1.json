@@ -12,8 +12,13 @@
         "FromStateId": "4",
         "ToStateId": "5",
         "Timestamp": "123456789",
-        "Cause": {
-            "a": "10"
-        }
+        "Causes": [
+            { 
+               "Expression": "a = 10"
+            },
+            {
+               "Expression": "b < 12"
+            }
+        ]
     }
 }

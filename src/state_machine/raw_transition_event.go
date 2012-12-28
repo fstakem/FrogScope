@@ -10,7 +10,7 @@ type RawTransitionEvent struct {
 	FromStateId 		string
 	ToStateId 		string
 	Timestamp		string
-	Cause 			map[string]interface{}
+	Causes 			[]map[string]interface{}
 }
 
 func NewRawTransitionEvent(msg string) *RawTransitionEvent {

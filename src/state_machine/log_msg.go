@@ -107,6 +107,22 @@ func (this *LogMsg) String() (output string) {
 }
  
 func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
+	j_data, err := json.Marshal(data)
+	
+	if err != nil {
+		log.Println("")
+		return nil
+	}
+	
+	data_str := string(j_data)
+	raw_state_machine := NewRawStateMachine(data_str)
+	
+	if raw_state_machine == nil {
+		log.Println("")
+		return nil
+	}
+	
+	
 	return nil
 }
 

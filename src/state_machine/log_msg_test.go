@@ -36,6 +36,7 @@ func TestParseStateMachineMsg(t *testing.T) {
 	log_msg := getRawMsg(t, filename)
 	
 	// Create state machine from imported file
+	ParseStateMachineMsg(log_msg.Data)
 	
 	// Test to make sure the objects are the same
 }
@@ -48,8 +49,14 @@ func TestParseStateTransitionMsg(t *testing.T) {
 	test_transition_event.FromStateId = 4
 	test_transition_event.ToStateId = 5
 	test_transition_event.Timestamp = 123456789
-	test_transition_event.Cause = make(map[string]string)
-	test_transition_event.Cause["a"] = "10"
+	
+	cause := Cause{}
+	cause.Expression = "a = 10"
+	test_transition_event.Causes = append(test_transition_event.Causes, cause)
+	
+	cause = Cause{}
+	cause.Expression = "b < 12"
+	test_transition_event.Causes = append(test_transition_event.Causes, cause)
 	
 	// Import file
 	filename := "../../data/state_transition_event_1.json"

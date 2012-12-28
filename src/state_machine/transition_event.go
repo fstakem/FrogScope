@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"strconv"
 	"log"
+	"encoding/json"
 )
 
 type TransitionEvent struct {
@@ -12,7 +13,7 @@ type TransitionEvent struct {
 	FromStateId 		int
 	ToStateId 		int
 	Timestamp 		uint64
-	Cause 			map[string]string
+	Causes		 	[]Cause
 }
 
 func NewTransitionEvent(raw_transition_event *RawTransitionEvent) *TransitionEvent {
@@ -63,12 +64,41 @@ func NewTransitionEvent(raw_transition_event *RawTransitionEvent) *TransitionEve
 	transition_event.Timestamp = timestamp
 	
 	// Cause
-	transition_event.Cause = make(map[string]string)
-	for key, value := range raw_transition_event.Cause {
-		str_val, ok := value.(string)
-		if ok {
-			transition_event.Cause[key] = str_val
+	j_data, err := json.Marshal(raw_transition_event.Causes)
+	
+	if err != nil {
+		log.Println("RawTransitionEvent.Causes not properly parsed.")
+		return nil
+	}
+	
+	var raw_causes []interface{}
+	data_str := string(j_data)
+	err = json.Unmarshal([]byte(data_str), &raw_causes)
+	
+	if err != nil {
+		log.Println("RawTransitionEvent.Causes not properly parsed.")
+		return nil
+	}
+	
+	for i := range raw_causes {
+		j_data, err := json.Marshal(raw_causes[i])
+	
+		if err != nil {
+			log.Println("RawTransitionEvent.Causes not properly parsed.")
+			return nil
 		}
+		
+		data_str := string(j_data)
+		var raw_cause RawCause
+		err = json.Unmarshal([]byte(data_str), &raw_cause)
+		
+		if err != nil {
+			log.Println("RawTransitionEvent.Causes not properly parsed.")
+			return nil
+		}
+	
+		cause := NewCause(&raw_cause)
+		transition_event.Causes = append(transition_event.Causes, *cause)
 	}
 	
 	return &transition_event
@@ -87,12 +117,12 @@ func (this *TransitionEvent) Cmp(other *TransitionEvent) (equ bool) {
 		return false
 	} 
 	
-	for key, _ := range this.Cause {
-		if _, ok := other.Cause[key]; !ok {
-			return false
-		}
-		
-		if this.Cause[key] != other.Cause[key] {
+	if len(this.Causes) != len(other.Causes) {
+		return false
+	}
+	
+	for i := range this.Causes {
+		if !this.Causes[i].Cmp(&other.Causes[i]) {
 			return false
 		}
 	}
@@ -108,9 +138,9 @@ func (this *TransitionEvent) String() (output string) {
 	buffer.WriteString("  ToStateId: " + strconv.Itoa(this.ToStateId))
 	buffer.WriteString("  Timestamp: " + strconv.FormatUint(this.Timestamp, 10))
 	
-	for key, value := range this.Cause {
-		cause_str := "  Cause: " + key + "->" + value
-		buffer.WriteString(cause_str)
+	buffer.WriteString("  Causes-> ")
+	for i := range this.Causes {
+		buffer.WriteString(this.Causes[i].String() + "  ")
 	}
 	
 	return buffer.String()

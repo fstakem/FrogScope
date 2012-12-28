@@ -6,8 +6,7 @@ import (
 )
 
 type RawCause struct {
-	Symbol 	string
-	Value	string
+	Expression 	string
 }
 
 func NewRawCause(msg string) *RawCause {
@@ -26,19 +25,16 @@ func NewRawCause(msg string) *RawCause {
 }
 
 func (this *RawCause) Cmp(other *RawCause) (equ bool) {
-	if this.Symbol != other.Symbol {
+	if this.Expression != other.Expression {
 		return false
-	} else if this.Value != other.Value {
-		return false
-	}
+	} 
 	
 	return true
 }
 
 func (this *RawCause) String() (output string) {
 	var buffer bytes.Buffer
-	buffer.WriteString("Symbol: " + this.Symbol)
-	buffer.WriteString("  Value: " + this.Value)
+	buffer.WriteString("Expression: " + this.Expression)
 	
 	return buffer.String()
 }

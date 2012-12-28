@@ -40,8 +40,6 @@ func (this *StateTransition) Cmp(other *StateTransition) (equ bool) {
 		return false
 	} else if this.Id != other.Id {
 		return false
-	} else if this.Timestamp != other.Timestamp {
-		return false
 	} else if !this.From.Cmp(&other.From) {
 		return false
 	} else if !this.To.Cmp(&other.To) {
@@ -65,7 +63,7 @@ func (this *StateTransition) String() (output string) {
 	var buffer bytes.Buffer
 	buffer.WriteString("Name: " + this.Name)
 	buffer.WriteString(" Id: " + strconv.Itoa(this.Id))
-	buffer.WriteString(" Timestamp: " + strconv.FormatUint(this.Timestamp, 10))
+	//buffer.WriteString(" Timestamp: " + strconv.FormatUint(this.Timestamp, 10))
 	buffer.WriteString(" From: " + this.From.String())
 	buffer.WriteString(" To: " + this.To.String())
 	
