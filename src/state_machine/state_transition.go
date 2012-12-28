@@ -16,7 +16,7 @@ type StateTransition struct {
 	Causes 		[]Cause
 }
 
-func NewStateTransition(raw_state_transition *RawStateTransition, states []State) *StateTransition {
+func NewStateTransition(raw_state_transition *RawStateTransition, states *[]State) *StateTransition {
 	if raw_state_transition == nil {
 		return nil
 	}
@@ -42,7 +42,7 @@ func NewStateTransition(raw_state_transition *RawStateTransition, states []State
 	}
 	
 	var found_state bool = false
-	for _, state := range states {
+	for _, state := range *states {
 		if state.Id == from_id {
 			state_transition.From = state
 			found_state = true
@@ -62,7 +62,7 @@ func NewStateTransition(raw_state_transition *RawStateTransition, states []State
 	}
 	
 	found_state = false
-	for _, state := range states {
+	for _, state := range *states {
 		if state.Id == to_id {
 			state_transition.To = state
 			found_state = true
