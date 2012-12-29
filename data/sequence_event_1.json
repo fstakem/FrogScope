@@ -1,0 +1,18 @@
+{
+    "Protocol": "frogscope",
+    "Version": "1",
+    "SeqNum": "1",
+    "Scope": "test",
+    "Timestamp": "123456789",
+    "Transmitter": "main",
+    "Type": "sequence_event",
+    "Data": {
+        "Name": "init"
+        "Id": "24",
+        "SeqDiagId": "1",
+        "FromId": "4",
+        "ToId": "5",
+        "Timestamp": "123456789",
+        "LinkId": "1"
+    }
+}

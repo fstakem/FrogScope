@@ -1,0 +1,38 @@
+{
+    "Protocol": "frogscope",
+    "Version": "1",
+    "SeqNum": "1",
+    "Scope": "test",
+    "Timestamp": "123456789",
+    "Transmitter": "main",
+    "Type": "sequence_diagram",
+    "Data": {
+        "Name": "connect",
+        "Id": "12",
+        "Components": [
+            {
+                "Name": "local",
+                "Id": "1"
+            },
+            {
+                "Name": "remote",
+                "Id": "2"
+            }
+        ],
+        "Events": [
+            {
+                "Name": "connect",
+                "Id": "1",
+                "FromId": "1",
+                "ToId": "2",
+                "LinkId": "none",
+            },
+            {
+                "Name": "connect_ack",
+                "Id": "2",
+                "FromId": "2",
+                "ToId": "1",
+                "LinkId": "1",            }
+        ]
+    }
+}
