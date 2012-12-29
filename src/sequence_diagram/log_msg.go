@@ -13,6 +13,8 @@ type MsgType int
 const (
 	STATE_MACHINE = iota
 	STATE_TRANSITION_EVENT
+	SEQUENCE_DIAGRAM
+	SEQUENCE_EVENT
 )
 
 type LogMsg struct {
@@ -106,7 +108,7 @@ func (this *LogMsg) String() (output string) {
 	return buffer.String()
 }
  
-func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
+func ParseSequenceDiagramMsg(data *map[string]interface{}) *SequenceDiagram {
 	j_data, err := json.Marshal(data)
 	
 	if err != nil {
@@ -114,25 +116,12 @@ func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
 		return nil
 	}
 	
-	data_str := string(j_data)
-	raw_state_machine := NewRawStateMachine(data_str)
 	
-	if raw_state_machine == nil {
-		log.Println("B")
-		return nil
-	}
 	
-	state_machine := NewStateMachine(raw_state_machine)
-	
-	if state_machine == nil {
-		log.Println("C")
-		return nil
-	}
-	
-	return state_machine
+	return nil
 }
 
-func ParseStateTransitionMsg(data *map[string]interface{}) *TransitionEvent {
+func ParseSequenceEventMsg(data *map[string]interface{}) *SequenceEvent {
 	j_data, err := json.Marshal(data)
 	
 	if err != nil {
@@ -140,22 +129,9 @@ func ParseStateTransitionMsg(data *map[string]interface{}) *TransitionEvent {
 		return nil
 	}
 	
-	data_str := string(j_data)
-	raw_transition_event := NewRawTransitionEvent(data_str)
 	
-	if raw_transition_event == nil {
-		log.Println("B")
-		return nil
-	}
 	
-	transition_event := NewTransitionEvent(raw_transition_event)
-	
-	if transition_event == nil {
-		log.Println("C")
-		return nil
-	}
-	
-	return transition_event
+	return nil
 }
 
 
