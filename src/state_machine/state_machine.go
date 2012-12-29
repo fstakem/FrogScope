@@ -148,12 +148,12 @@ func (this *StateMachine) String() (output string) {
 	
 	buffer.WriteString(" States: ")
 	for i := range this.States {
-		buffer.WriteString(this.States[i].String())
+		buffer.WriteString(this.States[i].String() + " ")
 	}
 	
 	buffer.WriteString(" Transitions: ")
 	for i := range this.Transitions {
-		buffer.WriteString(this.Transitions[i].String())
+		buffer.WriteString(this.Transitions[i].String() + " ")
 	}
 	
 	return buffer.String()

@@ -8,8 +8,8 @@ import (
 type RawStateMachine struct {
 	Name 		string
 	Id 			string
-	States 		map[string]interface{}
-	Transitions 	map[string]interface{}
+	States 		[]map[string]interface{}
+	Transitions []map[string]interface{}
 }
 
 func NewRawStateMachine(msg string) *RawStateMachine {

@@ -110,7 +110,7 @@ func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
 	j_data, err := json.Marshal(data)
 	
 	if err != nil {
-		log.Println("")
+		log.Println("A")
 		return nil
 	}
 	
@@ -118,19 +118,25 @@ func ParseStateMachineMsg(data *map[string]interface{}) *StateMachine {
 	raw_state_machine := NewRawStateMachine(data_str)
 	
 	if raw_state_machine == nil {
-		log.Println("")
+		log.Println("B")
 		return nil
 	}
 	
+	state_machine := NewStateMachine(raw_state_machine)
 	
-	return nil
+	if state_machine == nil {
+		log.Println("C")
+		return nil
+	}
+	
+	return state_machine
 }
 
 func ParseStateTransitionMsg(data *map[string]interface{}) *TransitionEvent {
 	j_data, err := json.Marshal(data)
 	
 	if err != nil {
-		log.Println("")
+		log.Println("A")
 		return nil
 	}
 	
@@ -138,14 +144,14 @@ func ParseStateTransitionMsg(data *map[string]interface{}) *TransitionEvent {
 	raw_transition_event := NewRawTransitionEvent(data_str)
 	
 	if raw_transition_event == nil {
-		log.Println("")
+		log.Println("B")
 		return nil
 	}
 	
 	transition_event := NewTransitionEvent(raw_transition_event)
 	
 	if transition_event == nil {
-		log.Println("")
+		log.Println("C")
 		return nil
 	}
 	

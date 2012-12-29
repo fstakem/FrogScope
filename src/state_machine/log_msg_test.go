@@ -30,15 +30,61 @@ func TestNewLogMsg(t *testing.T) {
 
 func TestParseStateMachineMsg(t *testing.T) { 
 	// Test data
+	test_state_machine := StateMachine{}
+	test_state_machine.Name = "machina"
+	test_state_machine.Id = 24
+	
+	init_state := State{}
+	init_state.Name = "init"
+	init_state.Id = 1
+	test_state_machine.States = append(test_state_machine.States, init_state)
+	
+	sec_state := State{}
+	sec_state.Name = "second"
+	sec_state.Id = 2
+	test_state_machine.States = append(test_state_machine.States, sec_state)
+	
+	state_transition := StateTransition{}
+	state_transition.Name = "x"
+	state_transition.Id = 1
+	state_transition.From = init_state
+	state_transition.To = sec_state
+	cause := Cause{}
+	cause.Expression = "a = 3"
+	state_transition.Causes = append(state_transition.Causes, cause)
+	cause = Cause{}
+	cause.Expression = "b > 4"
+	state_transition.Causes = append(state_transition.Causes, cause)
+	test_state_machine.Transitions = append(test_state_machine.Transitions, state_transition)
+	
+	state_transition = StateTransition{}
+	state_transition.Name = "y"
+	state_transition.Id = 2
+	state_transition.From = sec_state
+	state_transition.To = init_state
+	cause = Cause{}
+	cause.Expression = "a = 5"
+	state_transition.Causes = append(state_transition.Causes, cause)
+	cause = Cause{}
+	cause.Expression = "b > 6"
+	state_transition.Causes = append(state_transition.Causes, cause)
+	test_state_machine.Transitions = append(test_state_machine.Transitions, state_transition)
 	
 	// Import file
 	filename := "../../data/state_machine_1.json"
 	log_msg := getRawMsg(t, filename)
 	
 	// Create state machine from imported file
-	ParseStateMachineMsg(log_msg.Data)
+	state_machine := ParseStateMachineMsg(log_msg.Data)
+	t.Log("State machine imported from the file:")
+	t.Logf(state_machine.String())
 	
 	// Test to make sure the objects are the same
+	if !state_machine.Cmp(&test_state_machine) {
+		t.Log("The JSON data was not interpreted correctly.")
+		t.Fail()
+	}
+	
 }
 
 func TestParseStateTransitionMsg(t *testing.T) {
